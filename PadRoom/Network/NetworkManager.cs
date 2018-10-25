@@ -29,7 +29,7 @@ namespace PadRoom.Network
     maintain two way communication.
     */
 
-    class NetworkManager
+    public class NetworkManager
     {
         private static readonly int LRSendPort = 58763;
         private static readonly int LRRecievePort = 58764;

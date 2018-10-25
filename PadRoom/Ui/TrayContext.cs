@@ -49,7 +49,6 @@ namespace PadRoom
             return new MenuItem(address, ShowIpAddress);
         }
 
-
         MenuItem ExitMenuItem()
         {
             return new MenuItem("Exit", Exit);
@@ -68,7 +67,7 @@ namespace PadRoom
 
         void ShowIpAddress(object sender, EventArgs e)
         {
-
+            //TODO: Reconsider this feature.
         }
 
         void Exit(object sender, EventArgs e)
