@@ -72,7 +72,14 @@ namespace PadRoom
 
         void Exit(object sender, EventArgs e)
         {
-            Application.Exit();
+            try
+            {
+              Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

@@ -38,19 +38,33 @@ namespace PadRoom.Network
         private LightroomClient _lightroomReciever = new LightroomClient();
         private LightroomClient _lightroomSender = new LightroomClient();
 
+        public NetworkManager()
+        {
+            Application.ApplicationExit += new EventHandler(ApplicationWillStop);
+        }
+
         public void StartService()
         {
             var serverThread = new Thread(new ThreadStart(_networkServer.StartServer));
+            serverThread.IsBackground = true;
             serverThread.Start();
             NetworkServer.MessageRecievedHandler += OnNetworkMessage;
             
             Thread LRSendThread = new Thread(new ParameterizedThreadStart(_lightroomSender.Start));
+            LRSendThread.IsBackground = true;
             LRSendThread.Start(LRSendPort);
             
             
             Thread LRRecieveThread = new Thread(new ParameterizedThreadStart(_lightroomReciever.Start));
+            LRRecieveThread.IsBackground = true;
             LRRecieveThread.Start(LRRecievePort);
             _lightroomReciever.MessageRecievedHandler += OnLightroomMesage;
+
+        }
+
+        private void ApplicationWillStop(Object sender, EventArgs e)
+        {
+            StopService();
         }
 
         public void StopService()
